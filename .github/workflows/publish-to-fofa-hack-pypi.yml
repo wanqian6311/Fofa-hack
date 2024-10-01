@@ -22,6 +22,7 @@ jobs:
           context: .
           push: false  # 设置为 false，因为我们不会推送到 Docker Hub
           tags: my-python-app:latest  # 自定义镜像名称
+          platforms: linux/arm/v7  # 指定要构建的 ARM 架构
 
       - name: Run tests and build packages
         run: |
@@ -30,8 +31,8 @@ jobs:
             -w /app \
             my-python-app:latest \
             /bin/bash -c "
-              pip install --upgrade pip &&
-              pip install -r requirements.txt &&
+              pip install --upgrade pip && \
+              pip install -r requirements.txt && \
               python setup.py sdist bdist_wheel
             "
 
